@@ -1,7 +1,5 @@
 import 'package:finance_mobile_app/constants/constants.dart';
-import 'package:finance_mobile_app/controller/googleSignIn.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class RoundButton extends StatelessWidget {
   final String btnText;

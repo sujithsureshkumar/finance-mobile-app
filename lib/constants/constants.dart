@@ -1,4 +1,4 @@
-
+import 'package:finance_mobile_app/models/transaction.dart';
 import 'package:flutter/material.dart';
 
 const COLOR_BLACK = Color.fromRGBO(48, 47, 48, 1.0);
@@ -53,11 +53,17 @@ const TextTheme TEXT_THEME_DEFAULT = TextTheme(
     headline6: TextStyle(
         color: COLOR_BLACK, fontWeight: FontWeight.w700, fontSize: 12),
     bodyText1: TextStyle(
-        color: COLOR_BLACK, fontSize: 14, fontWeight: FontWeight.w500,height: 1.5),
+        color: COLOR_BLACK,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        height: 1.5),
     bodyText2: TextStyle(
-        color:  COLOR_GREY, fontSize: 14, fontWeight: FontWeight.w500,height: 1.5),
-    subtitle1:
-    TextStyle(color: COLOR_BLACK, fontSize: 12, fontWeight: FontWeight.w400),
+        color: COLOR_GREY,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        height: 1.5),
+    subtitle1: TextStyle(
+        color: COLOR_BLACK, fontSize: 12, fontWeight: FontWeight.w400),
     subtitle2: TextStyle(
         color: COLOR_GREY, fontSize: 12, fontWeight: FontWeight.w400));
 
@@ -75,12 +81,34 @@ const TextTheme TEXT_THEME_SMALL = TextTheme(
     headline6: TextStyle(
         color: COLOR_BLACK, fontWeight: FontWeight.w700, fontSize: 10),
     bodyText1: TextStyle(
-        color: COLOR_BLACK, fontSize: 12, fontWeight: FontWeight.w500,height: 1.5),
+        color: COLOR_BLACK,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        height: 1.5),
     bodyText2: TextStyle(
-        color:  COLOR_GREY, fontSize: 12, fontWeight: FontWeight.w500,height: 1.5),
-    subtitle1:
-    TextStyle(color: COLOR_BLACK, fontSize: 10, fontWeight: FontWeight.w400),
+        color: COLOR_GREY,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        height: 1.5),
+    subtitle1: TextStyle(
+        color: COLOR_BLACK, fontSize: 10, fontWeight: FontWeight.w400),
     subtitle2: TextStyle(
         color: COLOR_GREY, fontSize: 10, fontWeight: FontWeight.w400));
 
-
+final transactionList = [
+  Transaction(
+    name: "John",
+    amount: "400",
+    date: "01 Jan 2021",
+  ),
+  Transaction(
+    name: "Travolta",
+    amount: "400",
+    date: "01 Jan 2021",
+  ),
+   Transaction(
+    name: "Travolta",
+    amount: "400",
+    date: "01 Jan 2021",
+  ),
+];

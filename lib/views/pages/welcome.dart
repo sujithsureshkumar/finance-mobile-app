@@ -1,6 +1,8 @@
 
 import 'package:finance_mobile_app/constants/constants.dart';
 import 'package:finance_mobile_app/controller/googleSignIn.dart';
+import 'package:finance_mobile_app/views/pages/dashboard.dart';
+import 'package:finance_mobile_app/views/pages/news.dart';
 import 'package:finance_mobile_app/views/pages/signUp.dart';
 import 'package:finance_mobile_app/views/widgets/roundButton.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +95,21 @@ class WelcomeState extends State<Welcome> {
                ratio:1,
                onPressed:  (){
                 final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-                 provider.googleLogin();
+                 provider.googleLogin().then((user) {
+            if (user != null) {
+              setState(() {
+                isLoading = false;
+              });
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => Dashboard()));
+              print("Account Created Successfully");
+            } else {
+              print("Login Failed");
+              setState(() {
+                isLoading = false;
+              });
+            }
+          });
                } ,
               color:Color(0xff1111e8),
               textColor: Colors.white,

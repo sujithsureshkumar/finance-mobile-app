@@ -1,5 +1,7 @@
 
 import 'package:finance_mobile_app/constants/constants.dart';
+import 'package:finance_mobile_app/views/pages/dashboard.dart';
+import 'package:finance_mobile_app/views/pages/news.dart';
 import 'package:finance_mobile_app/views/pages/signUp.dart';
 import 'package:finance_mobile_app/views/widgets/customTextField.dart';
 import 'package:finance_mobile_app/views/widgets/loginIcons.dart';
@@ -7,6 +9,7 @@ import 'package:finance_mobile_app/views/widgets/roundButton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:finance_mobile_app/controller/auth.dart';
 
 
 
@@ -18,7 +21,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
+   final AuthService _auth = AuthService();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   bool isLoading = false;
@@ -120,9 +123,33 @@ class _SignInState extends State<SignIn> {
             SizedBox(
               height: size.height / 90,
             ),
-            const RoundButton(
+            RoundButton(
               btnText: 'SIGN IN',
-              // onPressed: widget.onPressed,
+               onPressed: () {
+        if (_email.text.isNotEmpty && _password.text.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
+
+          _auth.signInWithEmailAndPassword(_email.text, _password.text).then((user) {
+            if (user != null) {
+              print("Login Successfully");
+              setState(() {
+                isLoading = false;
+              });
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => Dashboard()));
+            } else {
+              print("Login Failed");
+              setState(() {
+                isLoading = false;
+              });
+            }
+          });
+        } else {
+          print("Please fill form correctly");
+        }
+      },
               ratio: 1,
               color:blue,
               textColor: kWhiteColor,

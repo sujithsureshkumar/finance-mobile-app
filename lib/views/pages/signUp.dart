@@ -1,9 +1,12 @@
 
 import 'package:finance_mobile_app/constants/constants.dart';
+import 'package:finance_mobile_app/views/pages/dashboard.dart';
+import 'package:finance_mobile_app/views/pages/news.dart';
 import 'package:finance_mobile_app/views/pages/signIn.dart';
 import 'package:finance_mobile_app/views/widgets/customTextField.dart';
 import 'package:finance_mobile_app/views/widgets/loginIcons.dart';
 import 'package:finance_mobile_app/views/widgets/roundButton.dart';
+import 'package:finance_mobile_app/controller/auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,6 +22,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
+   final AuthService _auth = AuthService();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -96,7 +100,7 @@ class _SignUpState extends State<SignUp> {
               child: Container(
                 width: size.width,
                 alignment: Alignment.center,
-                child: customTextfield("User Name",size, "User Name", Icons.person, _email,false),
+                child: customTextfield("User Name",size, "User Name", Icons.person, _name,false),
               ),
             ),
             Padding(
@@ -175,9 +179,35 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: size.height / 90,
             ),
-            const RoundButton(
+             RoundButton(
               btnText: 'SIGN UP',
-              // onPressed: widget.onPressed,
+              onPressed: () {
+        if (_name.text.isNotEmpty &&
+            _email.text.isNotEmpty &&
+            _password.text.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
+
+          _auth.createAccount(_name.text, _email.text, _password.text).then((user) {
+            if (user != null) {
+              setState(() {
+                isLoading = false;
+              });
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => Dashboard()));
+              print("Account Created Successfully");
+            } else {
+              print("Login Failed");
+              setState(() {
+                isLoading = false;
+              });
+            }
+          });
+        } else {
+          print("Please enter Fields");
+        }
+      },
               ratio: 1,
               color:blue,
               textColor: kWhiteColor,

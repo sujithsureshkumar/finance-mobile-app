@@ -1,5 +1,6 @@
 import 'package:finance_mobile_app/controller/googleSignIn.dart';
 import 'package:finance_mobile_app/views/pages/home.dart';
+import 'package:finance_mobile_app/views/pages/news.dart';
 import 'package:finance_mobile_app/views/pages/signIn.dart';
 import 'package:finance_mobile_app/views/pages/welcome.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class Wrapper extends StatelessWidget {
         if(snapshot.connectionState==ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         }else if(snapshot.hasData){
-          return Home();
+          return HomePage();
         }else if(snapshot.hasError){
           return Center(child: Text("Error"));
         }else{
